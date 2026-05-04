@@ -151,39 +151,7 @@ export default async function PublicProfilePage({ params }: PageProps) {
             )}
 
             {/* Contact info row */}
-            {((profile as ExtendedProfile).phone || (profile as ExtendedProfile).whatsapp || (profile as ExtendedProfile).email) && (
-              <div className="mt-4 flex flex-wrap justify-center gap-2">
-                {(profile as ExtendedProfile).phone && (
-                  <a
-                    href={`tel:${(profile as ExtendedProfile).phone}`}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all active:scale-95"
-                    style={{ background: "var(--profile-border)", color: "var(--profile-text)" }}
-                  >
-                    📞 {(profile as ExtendedProfile).phone}
-                  </a>
-                )}
-                {(profile as ExtendedProfile).whatsapp && (
-                  <a
-                    href={`https://wa.me/${((profile as ExtendedProfile).whatsapp ?? "").replace(/[^0-9]/g, "")}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all active:scale-95"
-                    style={{ background: "#25D36622", color: "#25D366" }}
-                  >
-                    💬 WhatsApp
-                  </a>
-                )}
-                {(profile as ExtendedProfile).email && (
-                  <a
-                    href={`mailto:${(profile as ExtendedProfile).email}`}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all active:scale-95"
-                    style={{ background: "var(--profile-border)", color: "var(--profile-text)" }}
-                  >
-                    ✉️ {(profile as ExtendedProfile).email}
-                  </a>
-                )}
-              </div>
-            )}
+            <ContactRow profile={profile as ExtendedProfile} />
           </div>
 
           {/* Divider */}
@@ -336,6 +304,50 @@ export default async function PublicProfilePage({ params }: PageProps) {
         </div>
       </div>
     </>
+  );
+}
+
+// ─── Contact row component ───────────────────────────────────────────────────
+
+function ContactRow({ profile }: { profile: ExtendedProfile }) {
+  const phone    = profile.phone    ?? null;
+  const whatsapp = profile.whatsapp ?? null;
+  const email    = profile.email    ?? null;
+
+  if (!phone && !whatsapp && !email) return null;
+
+  return (
+    <div className="mt-4 flex flex-wrap justify-center gap-2">
+      {phone && (
+        <a
+          href={`tel:${phone}`}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all active:scale-95"
+          style={{ background: "var(--profile-border)", color: "var(--profile-text)" }}
+        >
+          📞 {phone}
+        </a>
+      )}
+      {whatsapp && (
+        <a
+          href={`https://wa.me/${whatsapp.replace(/[^0-9]/g, "")}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all active:scale-95"
+          style={{ background: "#25D36622", color: "#25D366" }}
+        >
+          💬 WhatsApp
+        </a>
+      )}
+      {email && (
+        <a
+          href={`mailto:${email}`}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all active:scale-95"
+          style={{ background: "var(--profile-border)", color: "var(--profile-text)" }}
+        >
+          ✉️ {email}
+        </a>
+      )}
+    </div>
   );
 }
 
