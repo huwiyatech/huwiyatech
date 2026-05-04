@@ -25,7 +25,7 @@ export default async function EditProfilePage() {
     },
   });
 
-  const profile = user?.profile;
+  const profile = user?.profile ?? null;
 
   return (
     <div className="space-y-8 animate-fade-in">
