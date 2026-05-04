@@ -104,8 +104,7 @@ export default async function PublicProfilePage({ params }: PageProps) {
                   alt={name}
                   width={100}
                   height={100}
-                  className="w-24 h-24 rounded-full object-cover ring-4"
-                  style={{ ringColor: "var(--profile-border)" }}
+                  className="w-24 h-24 rounded-full object-cover ring-4 ring-white/30"
                   priority
                 />
               ) : (
