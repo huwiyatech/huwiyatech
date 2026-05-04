@@ -43,3 +43,6 @@ prisma/dev.db-journal
 /public/uploads/cvs/*
 !/public/uploads/avatars/.gitkeep
 !/public/uploads/cvs/.gitkeep
+
+.vercel
+.env*.local
